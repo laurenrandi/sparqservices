@@ -23,12 +23,17 @@ public class SecurityConfig {
 
   @Autowired
   UserRepository userRepo;
+  @Autowired
+OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
       .csrf(AbstractHttpConfigurer::disable)
       .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+      .oauth2Login(oc -> {
+  oc.successHandler(oAuth2LoginSuccessHandler);
+})
       .logout(lo -> {
         lo.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         lo.invalidateHttpSession(true);
