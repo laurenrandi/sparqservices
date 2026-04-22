@@ -23,8 +23,9 @@ public class SecurityConfig {
 
   @Autowired
   UserRepository userRepo;
+
   @Autowired
-OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+  OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,8 +33,8 @@ OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
       .csrf(AbstractHttpConfigurer::disable)
       .cors(cors -> cors.configurationSource(corsConfigurationSource()))
       .oauth2Login(oc -> {
-  oc.successHandler(oAuth2LoginSuccessHandler);
-})
+        oc.successHandler(oAuth2LoginSuccessHandler);
+      })
       .logout(lo -> {
         lo.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         lo.invalidateHttpSession(true);
@@ -51,7 +52,7 @@ OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+    configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173"));
     configuration.addAllowedHeader("*");
     configuration.addAllowedMethod("*");
     configuration.setAllowCredentials(true);
