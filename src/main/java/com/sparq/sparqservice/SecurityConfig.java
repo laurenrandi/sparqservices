@@ -40,7 +40,7 @@ public class SecurityConfig {
         lo.invalidateHttpSession(true);
         lo.clearAuthentication(true);
         SecurityContextHolder.clearContext();
-        lo.logoutSuccessUrl("http://localhost:3000/logout/success")
+        lo.logoutSuccessUrl("https://sparqproj.netlify.app/logout/success")
           .deleteCookies("JSESSIONID");
       })
       .authorizeHttpRequests(c -> {
@@ -52,7 +52,7 @@ public class SecurityConfig {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173"));
+    configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173","https://sparqproj.netlify.app/"));
     configuration.addAllowedHeader("*");
     configuration.addAllowedMethod("*");
     configuration.setAllowCredentials(true);

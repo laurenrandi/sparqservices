@@ -65,7 +65,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
       });
 
     this.setAlwaysUseDefaultTargetUrl(true);
-    this.setDefaultTargetUrl("http://localhost:3001/login/success/" + userRepo.findByEmail(email).get().getId());
+    this.setDefaultTargetUrl("https://sparqproj.netlify.app/login/success/" + userRepo.findByEmail(email).get().getId());
     super.onAuthenticationSuccess(request, response, authentication);
   }
 
